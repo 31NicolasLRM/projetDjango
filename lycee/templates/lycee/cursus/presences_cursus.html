@@ -1,0 +1,44 @@
+{% extends "master.html" %}
+
+{% block title %}
+  <h3>Présences/Absences</h3>
+{% endblock %}
+
+{% if liste %}
+  {% block content %}
+    {% for cursus in liste %}
+      <div class="container">
+
+        <div class="row">
+          <div class="col-sm-2">
+            <h4>{{ cursus.name }}</h4>
+              {% if listeStudent %}
+                {% for student in listeStudent %}
+                  {% if student.cursus == cursus %}
+                    <p><a href="/lycee/cursuspresences/student/{{ student.id }}">{{student.first_name}} {{student.last_name}}</a></p>
+                    {% for presence in listePresences %}
+                      {% if presence.student == student %}
+                        {% if presence.isMissing %}
+                          <p>Absent! {{presence.date}}</p>
+                        {% else %}
+                          <p>Présent! {{presence.date}}</p>
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                <p>No student to show.</p>
+              {% endif %}
+          </div>
+        </div>
+        <div class="col-sm-10"></div>
+
+      </div>
+      <br>
+    {% endfor %}
+
+  {% endblock %}
+{% else %}
+  <p>No cursus to show.</p>
+{% endif %}

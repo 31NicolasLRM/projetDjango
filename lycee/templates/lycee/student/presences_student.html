@@ -1,0 +1,23 @@
+{% extends "master.html" %}
+
+{% if student %}
+  {% block title %}
+    <h3>Presences of a student</h3>
+    <h3>{{student.first_name }} {{student.last_name}} {{student.cursus.name}}</h3>
+  {% endblock %}
+
+  {% block content %}
+    {% for presence in listePresences %}
+      {% if presence.student == student %}
+        <ul>
+          <li>{{presence.date}}</li>
+          <li>{{presence.isMissing}}</li>
+          <li>{{presence.reason}}</li>
+        </ul>
+      {% endif %}
+    {% endfor %}
+    
+  {% endblock %}
+{% else %}
+  <p>No student to show.</p>
+{% endif %}

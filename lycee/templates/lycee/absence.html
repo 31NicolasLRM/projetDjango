@@ -1,0 +1,20 @@
+{% extends "master.html" %}
+
+{% block title %}
+  <h3>Create particular Call of roll</h3>
+{% endblock %}
+
+{% block content %}
+
+  <form method="post">
+    {% csrf_token %}
+    <!-- Cross Site Request Forgeries -->
+    <!-- see https://docs.djangoproject.com/fr/1.8/ref/csrf -->
+    {{ form.as_p }}
+
+    <div class="boutons">
+      <button class="button radius alert left" type="cancel"><a href="/lycee/">Cancel</a></button>
+      <button class="button radius succes right" type="submit">Submit</button>
+    </div>
+  </form>
+{% endblock %}
